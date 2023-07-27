@@ -41,6 +41,8 @@ pub struct Config {
     omit_argument_labels: Option<bool>,
     #[serde(default)]
     custom_types: HashMap<String, CustomTypeConfig>,
+    #[serde(default)]
+    names: HashMap<String, String>,
 }
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize)]

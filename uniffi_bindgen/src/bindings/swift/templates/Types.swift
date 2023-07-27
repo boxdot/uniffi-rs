@@ -1,6 +1,14 @@
 {%- import "macros.swift" as swift %}
 {%- for type_ in ci.iter_types() %}
-{%- let type_name = type_|type_name %}
+
+{%- let type_name %}
+{%- match config.names.get((type_|type_name).as_str()) %}
+  {%- when Some with (renamed) %}
+    {%- let type_name = renamed.to_string() %}
+  {%- when None %}
+    {%- let type_name = type_|type_name %}
+{%- endmatch %}
+
 {%- let ffi_converter_name = type_|ffi_converter_name %}
 {%- let canonical_type_name = type_|canonical_name %}
 {%- let contains_object_references = ci.item_contains_object_references(type_) %}
